@@ -1,0 +1,13 @@
+<meta>
+     <oop>true</oop>
+     <info name="VehicleSpawner" type="script" version="1.0.0" author="Rafał (AxL) Żółtański" description="Easy vehicle spawn script." />
+
+     <script src="utils/Logger.lua" type="shared" />
+     <script src="utils/StringUtils.lua" type="shared" />
+     <script src="shareddata/Colors.lua" type="shared" />
+     <script src="shareddata/VehicleModelsData.lua" type="shared" />
+     <script src="vehiclespawn/s_VehicleSpawn.lua" type="server" />
+     <script src="vehiclespawn/s_VehicleSpawnCommand.lua" type="server" />
+     <script src="vehiclespawn/s_VehicleSpawnHelper.lua" type="server" />
+
+</meta>
