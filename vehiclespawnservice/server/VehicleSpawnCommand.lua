@@ -5,7 +5,7 @@ local function spawnVehicleCommandHandler(player, _, nameOrModelId)
     if String:isEmpty(nameOrModelId) then
 
         if not player:getData("vSpawnerInfoShown", false) then
-            player:outputChat("[VSpawner] Usage: /v [Vehicle name / Model ID]", Colors.cmd.description.r, Colors.cmd.description.g, Colors.cmd.description.b)
+            player:outputChat("[VSpawner] Usage: '/v [Vehicle name / Model ID]' or 'v' key to open GUI.", Colors.cmd.description.r, Colors.cmd.description.g, Colors.cmd.description.b)
         end
 
         player:triggerEvent("spawnVehicleCommandEvent", player)
