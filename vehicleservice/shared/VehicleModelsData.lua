@@ -1,12 +1,12 @@
 VehicleMainType = {
-    CAR = 1,
-    BOAT = 2,
-    PLANE = 3,
-    HELICOPTER = 4,
-    BIKE = 5,
-    MOTORBIKE = 6,
-    TRAILER = 7,
-    TRAIN = 8
+    CAR = { name = "Car" },
+    BOAT = { name = "Boat" },
+    PLANE = { name = "Plane" },
+    HELICOPTER = { name = "Helicopter" },
+    BIKE = { name = "Bike" },
+    MOTORBIKE = { name = "Motorbike" },
+    TRAILER = { name = "Trailer" },
+    TRAIN = { name = "Train" }
 }
 
 VehicleModelsData = {

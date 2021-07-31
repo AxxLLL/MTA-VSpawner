@@ -1,4 +1,4 @@
-g_Colors = {
+Colors = {
     cmd = {
         description = { r = 206, g = 214, b = 206, hex = "#CED6CE" },
         info = { r = 143, g = 217, b = 137, hex = "#8FD989" },

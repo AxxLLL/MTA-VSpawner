@@ -1,8 +1,8 @@
-VehicleSpawn = {}
+VehicleService = {}
 
-local LOG = Logger:new("VehicleSpawn")
+local LOG = Logger:new("VehicleService")
 
-function VehicleSpawn:findVehiclesByNameOrModelId(nameOrModelId)
+function VehicleService:findVehiclesByNameOrModelId(nameOrModelId)
 
     LOG:debug("Searching for vehicle with name or ID: '" .. nameOrModelId .. "'.")
 
@@ -21,7 +21,7 @@ function VehicleSpawn:findVehiclesByNameOrModelId(nameOrModelId)
     end
 end
 
-function VehicleSpawn:findByModelId(modelId)
+function VehicleService:findByModelId(modelId)
 
     LOG:debug("Looking for vehicle with model ID: " .. modelId .. ".")
 
@@ -34,7 +34,7 @@ function VehicleSpawn:findByModelId(modelId)
     return false
 end
 
-function VehicleSpawn:findAllByNameStartsWith(name)
+function VehicleService:findAllByNameStartsWith(name)
 
     LOG:debug("Looking for vehicle with name: '" .. name .. "'.")
 
@@ -50,9 +50,11 @@ function VehicleSpawn:findAllByNameStartsWith(name)
     return foundedModels
 end
 
-function VehicleSpawn:createVehicleInFrontOfElement(vehicle, element)
-    local distance = vehicle.spawnDistance or 10
-    local spawnPosition = element.matrix.position + element.matrix.forward * distance
-    LOG:debug("Creating vehicle with model ID: " .. vehicle.modelId .. " at position [x: " .. spawnPosition.x .. " | y: " .. spawnPosition.y .. " | z: " .. spawnPosition.z .. "].")
-    Vehicle(vehicle.modelId, spawnPosition)
+function VehicleService:findByCriteria(criteria)
+
+    if not criteria then
+        return VehicleModelsData
+    end
+
+    return VehicleModelsData --TODO
 end

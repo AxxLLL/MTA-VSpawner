@@ -5,9 +5,10 @@
      <script src="utils/Logger.lua" type="shared" />
      <script src="utils/StringUtils.lua" type="shared" />
      <script src="shareddata/Colors.lua" type="shared" />
-     <script src="shareddata/VehicleModelsData.lua" type="shared" />
-     <script src="vehiclespawn/s_VehicleSpawn.lua" type="server" />
-     <script src="vehiclespawn/s_VehicleSpawnCommand.lua" type="server" />
-     <script src="vehiclespawn/s_VehicleSpawnHelper.lua" type="server" />
+     <script src="vehicleservice/shared/VehicleModelsData.lua" type="shared" />
+     <script src="vehicleservice/shared/VehicleService.lua" type="shared" />
+     <script src="vehiclespawnservice/server/VehicleSpawnService.lua" type="server" />
+     <script src="vehiclespawnservice/server/VehicleSpawnCommand.lua" type="server" />
+     <script src="vehiclespawnservice/server/VehicleSpawnHelper.lua" type="server" />
 
 </meta>
