@@ -9,7 +9,7 @@ Download all sources and put them in your MTA server resources directory.
 
 ## Usage
 
-Type '/v [Model ID, name (or part of name) of vehicle or nothing]' or press 'v' button to open GUI menu.
+Type ```/v [Model ID, name (or part of name) or nothing]``` or press ```v``` button to open GUI menu.
 
 ## Presentation
 
