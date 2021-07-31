@@ -9,4 +9,4 @@ Download all sources and put them in your MTA server resources directory.
 
 ## Presentation
 
-![Main data view](https://i.ibb.co/RHyGk6C/vspawner.jpg)
+![Main data view](https://i.ibb.co/HgdLfPr/vspawner.jpg)
