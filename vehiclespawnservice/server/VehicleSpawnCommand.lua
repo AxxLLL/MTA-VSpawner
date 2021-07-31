@@ -3,8 +3,13 @@ local LOG = Logger:new("VehicleSpawnCommand")
 local function spawnVehicleCommandHandler(player, _, nameOrModelId)
 
     if String:isEmpty(nameOrModelId) then
-        player:outputChat("[VSpawner] Usage: /v [Vehicle name / Model ID]", Colors.cmd.description.r, Colors.cmd.description.g, Colors.cmd.description.b)
+
+        if not player:getData("vSpawnerInfoShown", false) then
+            player:outputChat("[VSpawner] Usage: /v [Vehicle name / Model ID]", Colors.cmd.description.r, Colors.cmd.description.g, Colors.cmd.description.b)
+        end
+
         player:triggerEvent("spawnVehicleCommandEvent", player)
+        player:setData("vSpawnerInfoShown", true, false)
         return
     end
 
@@ -25,6 +30,5 @@ local function spawnVehicleCommandHandler(player, _, nameOrModelId)
 
 end
 addCommandHandler("vehicle", spawnVehicleCommandHandler)
+addCommandHandler("veh", spawnVehicleCommandHandler)
 addCommandHandler("v", spawnVehicleCommandHandler)
-addCommandHandler("car", spawnVehicleCommandHandler)
-addCommandHandler("c", spawnVehicleCommandHandler)

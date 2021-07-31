@@ -9,3 +9,7 @@ function string:startsWithIgnoreCase(startsString)
     local searchLen = startsString:len()
     return self:sub(1, searchLen) == searchForName
 end
+
+function string:isNumber()
+    return tonumber(self) ~= nil and true
+end

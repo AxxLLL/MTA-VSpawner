@@ -6,10 +6,8 @@ function VehicleService:findVehiclesByNameOrModelId(nameOrModelId)
 
     LOG:debug("Searching for vehicle with name or ID: '" .. nameOrModelId .. "'.")
 
-    local modelId = tonumber(nameOrModelId)
-
-    if modelId then
-        local vehicle = self:findByModelId(modelId)
+    if nameOrModelId:isNumber() then
+        local vehicle = self:findByModelId(nameOrModelId)
 
         if not vehicle then
             return {}
@@ -25,8 +23,10 @@ function VehicleService:findByModelId(modelId)
 
     LOG:debug("Looking for vehicle with model ID: " .. modelId .. ".")
 
+    local searchForModelId = tonumber(modelId)
+
     for _, vehicle in ipairs(VehicleModelsData) do
-        if vehicle.modelId == modelId then
+        if vehicle.modelId == searchForModelId then
             return vehicle
         end
     end
@@ -52,9 +52,24 @@ end
 
 function VehicleService:findByCriteria(criteria)
 
+    local results = Table:copy(VehicleModelsData)
+
     if not criteria then
-        return VehicleModelsData
+        LOG:debug("No criteria. Returning full list of vehicles.")
+        return results
     end
 
-    return VehicleModelsData --TODO
+    if not String:isEmpty(criteria.name) then
+        LOG:debug("Searching vehicles by name criteria: '" .. criteria.name .. "'.")
+        results = self:findAllByNameStartsWith(criteria.name)
+    end
+
+    for _, filterElement in pairs(criteria) do
+        if VehicleServiceCriteriaFilterHelper:isValidCriteriaElement(filterElement) and not filterElement.filter then
+            LOG:debug("Removing vehicles by type '" .. filterElement.type.name .. "' criteria.")
+            VehicleServiceCriteriaFilterHelper:removeByVehicleType(results, filterElement.type)
+        end
+    end
+
+    return results
 end
