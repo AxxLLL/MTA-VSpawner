@@ -1,6 +1,6 @@
 VehicleSpawnService = {}
 
-local LOG = Logger:new("VehicleSpawn")
+local LOG = Logger:new("VehicleSpawnService")
 
 function VehicleSpawnService:createVehicleInFrontOfElement(vehicle, element)
     local distance = vehicle.spawnDistance or 10

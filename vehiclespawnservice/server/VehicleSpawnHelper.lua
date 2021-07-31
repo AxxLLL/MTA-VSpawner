@@ -2,7 +2,7 @@ VehicleSpawnHelper = {}
 
 function VehicleSpawnHelper:prepareMultipleResultsString(vehicles)
     local maxResults = 5
-    local presentedString = "Founded " .. Colors.white.hex .. #vehicles .. Colors.cmd.info.hex .. " vehicles: " .. Colors.white.hex .. self:concatVehiclesNames(vehicles, maxResults) .. Colors.cmd.info.hex .. "."
+    local presentedString = "Founded " .. Colors.white.hex .. #vehicles .. Colors.cmd.info.hex .. " vehicles: " .. Colors.white.hex .. self:concatVehicleNames(vehicles, maxResults) .. Colors.cmd.info.hex .. "."
 
     if maxResults < #vehicles then
         presentedString = presentedString:sub(1, presentedString:len() - 1)
@@ -12,7 +12,7 @@ function VehicleSpawnHelper:prepareMultipleResultsString(vehicles)
     return presentedString
 end
 
-function VehicleSpawnHelper:concatVehiclesNames(vehicles, maxResults)
+function VehicleSpawnHelper:concatVehicleNames(vehicles, maxResults)
 
     local results = {}
 
