@@ -1,4 +1,7 @@
 bindKey( "v", "down", function ()
-    VehicleSpawnGui:create()
-    VehicleSpawnGui:setVisible(not VehicleSpawnGui:isVisible())
+    if VehicleSpawnGui:isVisible() then
+        VehicleSpawnGui:hide()
+    else
+        VehicleSpawnGui:createIfNotExistsAndShow()
+    end
 end)

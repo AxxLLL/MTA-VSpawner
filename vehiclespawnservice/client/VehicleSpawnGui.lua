@@ -1,76 +1,16 @@
-VehicleSpawnGui = {}
-
-function VehicleSpawnGui:create()
-
-    if self:exists() then
-        return
-    end
-
-    self.window = GuiWindow(0.70, 0.55, 0.25, 0.40, "Vehicle Spawner", true)
-    self.window:setAlpha(1.0)
-    self.window:setSizable(false)
-    self.window:setMovable(true)
-    self.window:setVisible(false)
-
-    self.searchBox = GuiEdit(0.1, 0.1, 0.8, 0.1, "", true, self.window)
-    self.searchBox:setMaxLength(32)
-    addEventHandler("onClientGUIChanged", self.searchBox, function () VehicleSpawnGui:searchByCriteria() end , false)
-
-    self.filters = {}
-    self.filters.cars = self:createFilterCheckBox(0.1, 0.22, 0.15, 0.1, "Cars")
-    self.filters.boats = self:createFilterCheckBox(0.3, 0.22, 0.2, 0.1, "Boats")
-    self.filters.planes = self:createFilterCheckBox(0.5, 0.22, 0.2, 0.1, "Planes")
-    self.filters.helicopters = self:createFilterCheckBox(0.7, 0.22, 0.3, 0.1, "Helicopters")
-    self.filters.trailers = self:createFilterCheckBox(0.1, 0.30, 0.2, 0.1, "Trailers")
-    self.filters.trains = self:createFilterCheckBox(0.3, 0.30, 0.2, 0.1, "Trains")
-    self.filters.bikes = self:createFilterCheckBox(0.5, 0.30, 0.2, 0.1, "Bikes")
-    self.filters.motorbikes = self:createFilterCheckBox(0.7, 0.30, 0.3, 0.1, "Motorbikes")
-
-    self:createButton( 0.1, 0.41, 0.3, 0.05, "Select/Unselect all", function () self:selectUnselectFiltersStatuses() end)
-
-    self.results = self:createResultsTable(0.1, 0.50, 0.8, 0.31, {{"Model", 0.15}, {"Name", 0.50}, {"Type", 0.20}})
-    VehicleSpawnGui:refreshResults(VehicleService:findByCriteria(nil))
-
-    self:createButton( 0.53, 0.85, 0.2, 0.1, "Spawn", function () VehicleSpawnGui:spawnSelectedVehicle() end)
-    self:createButton( 0.75, 0.85, 0.2, 0.1, "Close", function () self:hide() end)
-end
-
-function VehicleSpawnGui:createFilterCheckBox(x, y, width, height, text)
-    local filter = GuiCheckBox(x, y, width, height, text, true, true, self.window)
-    addEventHandler("onClientGUIClick", filter, function () VehicleSpawnGui:searchByCriteria() end, false)
-    return filter
-end
-
-function VehicleSpawnGui:createResultsTable(x, y, width, height, colsData)
-
-    local table = GuiGridList(x, y, width, height, true, self.window)
-
-    for _, col in ipairs(colsData) do
-        table:addColumn(col[1], col[2])
-    end
-
-    addEventHandler( "onClientGUIDoubleClick", table, function () VehicleSpawnGui:spawnSelectedVehicle() end, false)
-    return table
-end
-
-function VehicleSpawnGui:createButton(x, y, width, height, text, actionFunction)
-    local btn = GuiButton (x, y, width, height, text, true, self.window)
-    addEventHandler("onClientGUIClick", btn, function () actionFunction() end, false)
-end
+VehicleSpawnGui = VehicleSpawnGuiDraw:new()
 
 function VehicleSpawnGui:exists() return self.window ~= nil and true end
 
-function VehicleSpawnGui:show() self:setVisible(true) end
-
 function VehicleSpawnGui:hide() self:setVisible(false) end
 
-function VehicleSpawnGui:isVisible()
+function VehicleSpawnGui:createIfNotExistsAndShow()
 
     if not self:exists() then
-        return
+        self:create()
     end
 
-    return self.window:getVisible()
+    self:setVisible(true)
 end
 
 function VehicleSpawnGui:setVisible(visible)
@@ -82,6 +22,15 @@ function VehicleSpawnGui:setVisible(visible)
     visible = visible and true
     self.window:setVisible(visible)
     showCursor(visible)
+end
+
+function VehicleSpawnGui:isVisible()
+
+    if not self:exists() then
+        return false
+    end
+
+    return self.window:getVisible()
 end
 
 function VehicleSpawnGui:selectUnselectFiltersStatuses()
@@ -103,16 +52,17 @@ end
 
 function VehicleSpawnGui:searchByCriteria()
 
+    local filters = self.filters
     local results = VehicleService:findByCriteria({
         name = self.searchBox:getText(),
-        isCar = {filter = self.filters.cars:getSelected(), type = VehicleMainType.CAR},
-        isBoat = {filter = self.filters.boats:getSelected(), type = VehicleMainType.BOAT},
-        isPlane = {filter = self.filters.planes:getSelected(), type = VehicleMainType.PLANE},
-        isHelicopter = {filter = self.filters.helicopters:getSelected(), type = VehicleMainType.HELICOPTER},
-        isBike = {filter = self.filters.bikes:getSelected(), type = VehicleMainType.BIKE},
-        isMotorbike = {filter = self.filters.motorbikes:getSelected(), type = VehicleMainType.MOTORBIKE},
-        isTrailer = {filter = self.filters.trailers:getSelected(), type = VehicleMainType.TRAILER},
-        isTrain = {filter = self.filters.trains:getSelected(), type = VehicleMainType.TRAIN}
+        isCar = {filter = filters.cars:getSelected(), type = VehicleMainType.CAR},
+        isBoat = {filter = filters.boats:getSelected(), type = VehicleMainType.BOAT},
+        isPlane = {filter = filters.planes:getSelected(), type = VehicleMainType.PLANE},
+        isHelicopter = {filter = filters.helicopters:getSelected(), type = VehicleMainType.HELICOPTER},
+        isBike = {filter = filters.bikes:getSelected(), type = VehicleMainType.BIKE},
+        isMotorbike = {filter = filters.motorbikes:getSelected(), type = VehicleMainType.MOTORBIKE},
+        isTrailer = {filter = filters.trailers:getSelected(), type = VehicleMainType.TRAILER},
+        isTrain = {filter = filters.trains:getSelected(), type = VehicleMainType.TRAIN}
     })
 
     self:refreshResults(results)

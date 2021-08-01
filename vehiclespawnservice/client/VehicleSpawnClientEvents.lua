@@ -1,6 +1,5 @@
 function spawnVehicleCommandEventHandler()
-    VehicleSpawnGui:create()
-    VehicleSpawnGui:show()
+    VehicleSpawnGui:createIfNotExistsAndShow()
 end
 addEvent( "spawnVehicleCommandEvent", true )
 addEventHandler( "spawnVehicleCommandEvent", localPlayer, spawnVehicleCommandEventHandler )

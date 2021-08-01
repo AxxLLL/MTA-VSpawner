@@ -13,6 +13,7 @@
      <script src="vehiclespawnservice/server/VehicleSpawnCommand.lua" type="server" />
      <script src="vehiclespawnservice/server/VehicleSpawnHelper.lua" type="server" />
      <script src="vehiclespawnservice/server/VehicleSpawnServerEvents.lua" type="server" />
+     <script src="vehiclespawnservice/client/VehicleSpawnGuiDraw.lua" type="client" />
      <script src="vehiclespawnservice/client/VehicleSpawnGui.lua" type="client" />
      <script src="vehiclespawnservice/client/VehicleSpawnClientEvents.lua" type="client" />
      <script src="vehiclespawnservice/client/VehicleSpawnKeyBind.lua" type="client" />
