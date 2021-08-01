@@ -133,6 +133,11 @@ end
 
 function VehicleSpawnGui:spawnSelectedVehicle()
 
+    if localPlayer:isDead() then
+        outputChatBox("You must be alive to use this command.", Colors.cmd.error.r, Colors.cmd.error.g, Colors.cmd.error.b)
+        return
+    end
+
     local selectedRow = self.results:getSelectedItem()
 
     if not selectedRow or selectedRow == -1 then

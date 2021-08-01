@@ -13,6 +13,11 @@ local function spawnVehicleCommandHandler(player, _, nameOrModelId)
         return
     end
 
+    if player:isDead() then
+        player:outputChat("You must be alive to use this command.", Colors.cmd.error.r, Colors.cmd.error.g, Colors.cmd.error.b)
+        return
+    end
+
     LOG:debug("Player '" .. player:getName() .. "' is trying to create vehicle with name or ID: '" .. nameOrModelId .. "'.")
 
     local vehicles = VehicleService:findVehiclesByNameOrModelId(nameOrModelId)
