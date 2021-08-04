@@ -39,10 +39,12 @@ function VehicleService:findAllByNameStartsWith(name)
     LOG:debug("Looking for vehicle with name: '" .. name .. "'.")
 
     local foundedModels = {}
+    local nameWithoutWhitespaces = name:gsub("%s+", "")
 
     for _, vehicle in pairs(VehicleModelsData) do
         local lModelName = vehicle.name:lower()
-        if lModelName:startsWithIgnoreCase(name) then
+        lModelName = lModelName:gsub("%s+", "")
+        if lModelName:startsWithIgnoreCase(nameWithoutWhitespaces) then
             table.insert(foundedModels, vehicle)
         end
     end
@@ -64,10 +66,10 @@ function VehicleService:findByCriteria(criteria)
         results = self:findAllByNameStartsWith(criteria.name)
     end
 
-    for _, filterElement in pairs(criteria) do
-        if VehicleServiceCriteriaFilterHelper:isValidCriteriaElement(filterElement) and not filterElement.filter then
-            LOG:debug("Removing vehicles by type '" .. filterElement.type.name .. "' criteria.")
-            VehicleServiceCriteriaFilterHelper:removeByVehicleType(results, filterElement.type)
+    for _, filterElement in ipairs(criteria) do
+        if VehicleServiceCriteriaFilterHelper:isValidCriteriaElement(filterElement) then
+            LOG:debug("Removing vehicles by type '" .. filterElement.name .. "' criteria.")
+            VehicleServiceCriteriaFilterHelper:removeByVehicleType(results, filterElement)
         end
     end
 

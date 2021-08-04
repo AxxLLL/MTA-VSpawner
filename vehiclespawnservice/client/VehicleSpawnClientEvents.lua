@@ -1,4 +1,4 @@
-function spawnVehicleCommandEventHandler()
+local function spawnVehicleCommandEventHandler()
     VehicleSpawnGui:createIfNotExistsAndShow()
 end
 addEvent( "spawnVehicleCommandEvent", true )
