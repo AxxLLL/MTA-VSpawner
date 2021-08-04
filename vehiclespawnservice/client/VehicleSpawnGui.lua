@@ -52,19 +52,17 @@ end
 
 function VehicleSpawnGui:searchByCriteria()
 
-    local filters = self.filters
-    local results = VehicleService:findByCriteria({
-        name = self.searchBox:getText(),
-        isCar = {filter = filters.cars:getSelected(), type = VehicleMainType.CAR},
-        isBoat = {filter = filters.boats:getSelected(), type = VehicleMainType.BOAT},
-        isPlane = {filter = filters.planes:getSelected(), type = VehicleMainType.PLANE},
-        isHelicopter = {filter = filters.helicopters:getSelected(), type = VehicleMainType.HELICOPTER},
-        isBike = {filter = filters.bikes:getSelected(), type = VehicleMainType.BIKE},
-        isMotorbike = {filter = filters.motorbikes:getSelected(), type = VehicleMainType.MOTORBIKE},
-        isTrailer = {filter = filters.trailers:getSelected(), type = VehicleMainType.TRAILER},
-        isTrain = {filter = filters.trains:getSelected(), type = VehicleMainType.TRAIN}
-    })
+    local criteria = {
+        name = self.searchBox:getText()
+    }
 
+    for _, filter in pairs(self.filters) do
+        if not filter.obj:getSelected() then
+            table.insert(criteria, filter.criteria)
+        end
+    end
+
+    local results = VehicleService:findByCriteria(criteria)
     self:refreshResults(results)
 end
 

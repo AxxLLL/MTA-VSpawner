@@ -1,7 +1,7 @@
 VehicleServiceCriteriaFilterHelper = {}
 
 function VehicleServiceCriteriaFilterHelper:isValidCriteriaElement(element)
-    return type(element) == "table" and element.filter ~= nil and element.type ~= nil
+    return type(element) == "table"
 end
 
 function VehicleServiceCriteriaFilterHelper:removeByVehicleType(resultsTable, vehicleType)

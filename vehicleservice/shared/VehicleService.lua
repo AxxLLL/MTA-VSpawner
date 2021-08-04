@@ -64,10 +64,10 @@ function VehicleService:findByCriteria(criteria)
         results = self:findAllByNameStartsWith(criteria.name)
     end
 
-    for _, filterElement in pairs(criteria) do
-        if VehicleServiceCriteriaFilterHelper:isValidCriteriaElement(filterElement) and not filterElement.filter then
-            LOG:debug("Removing vehicles by type '" .. filterElement.type.name .. "' criteria.")
-            VehicleServiceCriteriaFilterHelper:removeByVehicleType(results, filterElement.type)
+    for _, filterElement in ipairs(criteria) do
+        if VehicleServiceCriteriaFilterHelper:isValidCriteriaElement(filterElement) then
+            LOG:debug("Removing vehicles by type '" .. filterElement.name .. "' criteria.")
+            VehicleServiceCriteriaFilterHelper:removeByVehicleType(results, filterElement)
         end
     end
 
