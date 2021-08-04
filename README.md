@@ -1,5 +1,5 @@
 # VSpawner
-![Current Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Current Version](https://img.shields.io/badge/version-1.1.0-green.svg)
 
 VSpawner is script for [MTA](https://multitheftauto.com/), allowing user to easy spawn vehicle on map.
 
