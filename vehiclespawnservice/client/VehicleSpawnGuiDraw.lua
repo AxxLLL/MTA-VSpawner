@@ -29,14 +29,14 @@ function VehicleSpawnGuiDraw:create()
     addEventHandler("onClientGUIChanged", self.searchBox, function () self:searchByCriteria() end , false)
 
     self.filters = {}
-    self.filters.cars = self:createFilterCheckBox(0.1, 0.22, 0.15, 0.1, "Cars")
-    self.filters.boats = self:createFilterCheckBox(0.3, 0.22, 0.2, 0.1, "Boats")
-    self.filters.planes = self:createFilterCheckBox(0.5, 0.22, 0.2, 0.1, "Planes")
-    self.filters.helicopters = self:createFilterCheckBox(0.7, 0.22, 0.3, 0.1, "Helicopters")
-    self.filters.trailers = self:createFilterCheckBox(0.1, 0.30, 0.2, 0.1, "Trailers")
-    self.filters.trains = self:createFilterCheckBox(0.3, 0.30, 0.2, 0.1, "Trains")
-    self.filters.bikes = self:createFilterCheckBox(0.5, 0.30, 0.2, 0.1, "Bikes")
-    self.filters.motorbikes = self:createFilterCheckBox(0.7, 0.30, 0.3, 0.1, "Motorbikes")
+    self.filters.cars = self:createFilterCheckBox(0.1, 0.22, 0.15, 0.1, "Cars", VehicleMainType.CAR)
+    self.filters.boats = self:createFilterCheckBox(0.3, 0.22, 0.2, 0.1, "Boats", VehicleMainType.BOAT)
+    self.filters.planes = self:createFilterCheckBox(0.5, 0.22, 0.2, 0.1, "Planes", VehicleMainType.PLANE)
+    self.filters.helicopters = self:createFilterCheckBox(0.7, 0.22, 0.3, 0.1, "Helicopters", VehicleMainType.HELICOPTER)
+    self.filters.trailers = self:createFilterCheckBox(0.1, 0.30, 0.2, 0.1, "Trailers", VehicleMainType.TRAILER)
+    self.filters.trains = self:createFilterCheckBox(0.3, 0.30, 0.2, 0.1, "Trains", VehicleMainType.TRAIN)
+    self.filters.bikes = self:createFilterCheckBox(0.5, 0.30, 0.2, 0.1, "Bikes", VehicleMainType.BIKE)
+    self.filters.motorbikes = self:createFilterCheckBox(0.7, 0.30, 0.3, 0.1, "Motorbikes", VehicleMainType.MOTORBIKE)
 
     self:createButton( 0.1, 0.41, 0.3, 0.05, "Select/Unselect all", function () self:selectUnselectFiltersStatuses() end)
 
@@ -47,10 +47,10 @@ function VehicleSpawnGuiDraw:create()
     self:createButton( 0.75, 0.85, 0.2, 0.1, "Close", function () self:hide() end)
 end
 
-function VehicleSpawnGuiDraw:createFilterCheckBox(x, y, width, height, text)
+function VehicleSpawnGuiDraw:createFilterCheckBox(x, y, width, height, text, criteria)
     local filter = GuiCheckBox(x, y, width, height, text, true, true, self.window)
     addEventHandler("onClientGUIClick", filter, function () self:searchByCriteria() end, false)
-    return filter
+    return { obj = filter, criteria = criteria }
 end
 
 function VehicleSpawnGuiDraw:createResultsTable(x, y, width, height, colsData)
