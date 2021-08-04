@@ -1,4 +1,4 @@
-function spawnVehicleGuiEventHandler(vehicle)
+local function spawnVehicleGuiEventHandler(vehicle)
     if client then
         VehicleSpawnService:createVehicleInFrontOfElement(vehicle, client)
     end
