@@ -1,6 +1,9 @@
 local LOG = Logger:new("VehicleSpawnCommand")
 
-local function spawnVehicleCommandHandler(player, _, nameOrModelId)
+local function spawnVehicleCommandHandler(player, _, ...)
+
+    local params = {...}
+    local nameOrModelId = table.concat(params, " ")
 
     if String:isEmpty(nameOrModelId) then
 

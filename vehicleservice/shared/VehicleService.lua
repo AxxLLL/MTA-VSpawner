@@ -39,10 +39,12 @@ function VehicleService:findAllByNameStartsWith(name)
     LOG:debug("Looking for vehicle with name: '" .. name .. "'.")
 
     local foundedModels = {}
+    local nameWithoutWhitespaces = name:gsub("%s+", "")
 
     for _, vehicle in pairs(VehicleModelsData) do
         local lModelName = vehicle.name:lower()
-        if lModelName:startsWithIgnoreCase(name) then
+        lModelName = lModelName:gsub("%s+", "")
+        if lModelName:startsWithIgnoreCase(nameWithoutWhitespaces) then
             table.insert(foundedModels, vehicle)
         end
     end
